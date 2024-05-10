@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Include header content if necessary -->
+        <h1>Dashboard</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Metrics Section -->
+        <section id="metrics">
+            <!-- Sales Chart -->
+            <div id="salesChartContainer">
+                <canvas id="salesChart"></canvas>
+            </div>
+            
+            <!-- Revenue Chart -->
+            <div id="revenueChartContainer">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            
+            <!-- Inventory Turnover Chart -->
+            <div id="inventoryTurnoverChartContainer">
+                <canvas id="inventoryTurnoverChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Include footer content if necessary -->
+    </footer>
+
+    <!-- Script to Populate Charts -->
+    <script>
+        // Dummy data (replace with actual data fetched from backend)
+        const salesData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Sales',
+                data: [65, 59, 80, 81, 56, 55],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const revenueData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Revenue',
+                data: [2000, 1500, 2200, 1800, 2500, 2100],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const inventoryTurnoverData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Inventory Turnover',
+                data: [4, 5, 6, 7, 8, 9],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Populate Sales Chart
+        const salesChartCanvas = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesChartCanvas, {
+            type: 'line',
+            data: salesData,
+            options: {
+                // Add chart options if needed
+            }
+        });
+
+        // Populate Revenue Chart
+        const revenueChartCanvas = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueChartCanvas, {
+            type: 'bar',
+            data: revenueData,
+            options: {
+                // Add chart options if needed
+            }
+        });
+
+        // Populate Inventory Turnover Chart
+        const inventoryTurnoverChartCanvas = document.getElementById('inventoryTurnoverChart').getContext('2d');
+        new Chart(inventoryTurnoverChartCanvas, {
+            type: 'bar',
+            data: inventoryTurnoverData,
+            options: {
+                // Add chart options if needed
+            }
+        });
+    </script>
+</body>
+
+</html>
