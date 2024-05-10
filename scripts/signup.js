@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(data => {
-            // Redirect or show success message after successful registration
-            console.log(data); // You can redirect to a new page or update UI as needed
+            // Redirect to dashboard or home page after successful registration
+            window.location.href = '/dashboard'; // Example redirection to dashboard
         })
         .catch(error => {
             // Display error message to the user

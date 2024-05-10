@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         const emailInput = document.querySelector('.form__input[name="email"]');
-        const passwordInput = document.querySelector('.form__input[name="password"]'); // Corrected "Password" to "password"
+        const passwordInput = document.querySelector('.form__input[name="password"]');
 
         const email = emailInput.value;
         const password = passwordInput.value;
@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Invalid username/password combination');
+                throw new Error('Invalid email or password. Please try again.');
             }
             return response.json();
         })
         .then(data => {
-            // Redirect or show success message after successful login
-            console.log(data); // You can redirect to a new page or update UI as needed
+            // Redirect to dashboard or home page after successful login
+            window.location.href = '/dashboard'; // Example redirection to dashboard
         })
         .catch(error => {
             // Display error message to the user
