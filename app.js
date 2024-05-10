@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const stripe = require('stripe')('your_stripe_secret_key');
 
 const app = express();
 
@@ -9,10 +11,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); // Set the views directory
 
 // Middleware to parse JSON bodies
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Middleware to parse URL-encoded bodies
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setting up static files directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,12 +36,30 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // Define routes
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/checkout', (req, res) => {
+    res.render('checkout');
 });
 
-app.get('/signup', (req, res) => {
-    res.render('signup');
+// Payment route
+app.post('/charge', async (req, res) => {
+    try {
+        const { amount, token } = req.body;
+        // Create a charge with Stripe
+        const charge = await stripe.charges.create({
+            amount: amount,
+            currency: 'usd',
+            source: token,
+            description: 'Payment for products'
+        });
+        // Save the charge to your database or perform any other actions
+
+        // Render success page or redirect to a success URL
+        res.render('success');
+    } catch (error) {
+        console.error("Error processing payment:", error);
+        // Render error page or redirect to an error URL
+        res.render('error');
+    }
 });
 
 // Start the server
