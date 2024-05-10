@@ -4,6 +4,8 @@ const app = express()
 const routesRegister = require('./routes/auth.js')
 const routesUser = require('./routes/users.js')
 const routesProduct = require('./routes/product.js')
+const routesCart = require('./routes/cart.js')
+const routesOrder = require('./routes/order.js')
 const port = 3040;
 const connectDB = require('./database/database.js')
 const cors = require('cors')
@@ -19,8 +21,8 @@ app.use(function(req, res, next) {
 app.use('/auth',routesRegister);
 app.use('/user',routesUser);
 app.use('/product',routesProduct)
-
-
+app.use('/cart',routesCart)
+app.use('/order',routesOrder)
 
 const start = async() => {
     try {

@@ -15,7 +15,8 @@ const postRegister = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10); 
         const savedUser = await User.create({ name: name, password: hashedPassword });
 
-        res.status(201).json(savedUser);
+        const {password:savedPassword , ...others} = savedUser._doc
+        res.status(200).json({...others})
     } catch (error) {
         res.status(500).json({ msg: error.message }); 
     }
@@ -25,11 +26,13 @@ const postLogin = async (req,res)=>{
     try {
         const {name , password} = req.body
         const user = await User.findOne({name});
+        console.log(user)
         if (!user) { 
+            console.log("no user")
             return res.status(400).json({ msg: "Wrong username or password" }); 
         }
         const hashedPassword = await bcrypt.hash(password,10)
-        const passwordMatch = await bcrypt.compare(user.password,hashedPassword)
+        const passwordMatch = await bcrypt.compare(password,hashedPassword)
         if(passwordMatch) {
             const accessToken = jwt.sign(
             {   
