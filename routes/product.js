@@ -4,9 +4,9 @@ const {postProduct, putProduct, deleteProduct, getProduct,getAllProducts} = requ
 
 router.route('/')
 .post(tokenAuthorizationOnlyAdmin , postProduct)
-.get(tokenAuthorization , getAllProducts)
+.get(tokenAuthorization , getAllProducts);
 router.route('/:id')
 .put(tokenAuthorizationOnlyAdmin,putProduct)
 .delete(tokenAuthorizationOnlyAdmin,deleteProduct)
-.get(tokenAuthorization,getProduct)
+.get(tokenAuthorization,getProduct);
 module.exports = router;

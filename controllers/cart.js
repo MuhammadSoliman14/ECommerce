@@ -4,7 +4,7 @@ const Cart = require('../models/Cart')
 const putCart = async (req , res) =>{
     try {
         const updatedProduct = await Cart.findByIdAndUpdate(
-            {id:req.params.id},
+            {_id:req.params.id},
             {$set:req.body},
             {new:true}
         );

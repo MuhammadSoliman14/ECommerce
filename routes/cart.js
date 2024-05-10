@@ -5,7 +5,9 @@ const {putCart , deleteCart , postCart , getCart , getAllCarts} = require('../co
 router.route('/:id')
 .put(tokenAuthorization,putCart)
 .delete(tokenAuthorization,deleteCart)
-.post(tokenAuthorization,postCart)
 .get(tokenAuthorization,getCart)
-router.route('/').get(tokenAuthorizationOnlyAdmin,getAllCarts)
+
+router.route('/')
+.get(tokenAuthorizationOnlyAdmin,getAllCarts)
+.post(tokenAuthorization,postCart)
 module.exports = router;

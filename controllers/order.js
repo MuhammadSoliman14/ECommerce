@@ -3,8 +3,10 @@ const Order = require('../models/Order')
 const putOrder = async(req,res) =>{
     try {
         const updatedOrder = await Order.findByIdAndUpdate(
-            {id:req.params.id},
-            $set,
+            {_id:req.params.id},
+            {
+                $set:req.body
+            },
             {new:true}
         );
         res.status(200).json(updatedOrder)
@@ -24,8 +26,8 @@ const deleteOrder = async(req,res) => {
 
 const postOrder = async(req,res) =>{
     try {
-        const savedOrder = await Order.create(req.params.id)
-        res.status(200).json(savedOrder)
+        const savedorder = await Order.create(req.body) 
+        res.status(201).json(savedorder)
     } catch (error) {
         res.status(500).json({msg:error})
     }
