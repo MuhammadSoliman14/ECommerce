@@ -24,12 +24,12 @@ const postRegister = async (req, res) => {
 const postLogin = async (req,res)=>{
     try {
         const {name , password} = req.body
-        const user = await User.findOne({ name: name });
+        const user = await User.findOne({name});
         if (!user) { 
             return res.status(400).json({ msg: "Wrong username or password" }); 
         }
-       
-        const passwordMatch = await bcrypt.compare(password,user.password)
+        const hashedPassword = await bcrypt.hash(password,10)
+        const passwordMatch = await bcrypt.compare(user.password,hashedPassword)
         if(passwordMatch) {
             const accessToken = jwt.sign(
             {   

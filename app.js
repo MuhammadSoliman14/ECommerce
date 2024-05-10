@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const routesRegister = require('./routes/auth.js')
 const routesUser = require('./routes/users.js')
-// const routesProduct = require('./routes/product.js')
+const routesProduct = require('./routes/product.js')
 const port = 3040;
 const connectDB = require('./database/database.js')
 const cors = require('cors')
@@ -18,8 +18,10 @@ app.use(function(req, res, next) {
 
 app.use('/auth',routesRegister);
 app.use('/user',routesUser);
-// app.use('/product',routesProduct)
-// app.use('/user/',routesUser)
+app.use('/product',routesProduct)
+
+
+
 const start = async() => {
     try {
         await connectDB()
