@@ -32,7 +32,7 @@ const postLogin = async (req,res)=>{
             return res.status(400).json({ msg: "Wrong username or password" }); 
         }
         const hashedPassword = await bcrypt.hash(password,10)
-        const passwordMatch = await bcrypt.compare(password,hashedPassword)
+        const passwordMatch = await bcrypt.compare(password,user.password)
         if(passwordMatch) {
             const accessToken = jwt.sign(
             {   
