@@ -12,38 +12,30 @@
 
 <body>
 
-    <div class="container">
-        <form class="form" id="login" action="/SignupRequest" method="post">
-            <h1 class="form__title">Sign</h1>
-            
-            <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="First Name" name="firstName">
-                <!-- Changed name from 'FName' to 'firstName' -->
-                <div class="form__input-error-message"></div>
-            </div>
-            <div class="form__input-group">
-                <input type="text" class="form__input" autofocus placeholder="Last Name" name="lastName">
-                <!-- Changed name from 'Lname' to 'lastName' -->
-                <div class="form__input-error-message"></div>
-            </div>
+    <div class="container"><form class="form" id="login" action="/signup" method="post">
+        <h1 class="form__title">Sign</h1>
+    
+        <div class="form__input-group">
+            <input type="text" class="form__input" autofocus placeholder="Name" name="name">
+            <div class="form__input-error-message"></div>
+        </div>
+    
+        <div class="form__input-group">
+            <input type="password" class="form__input" autofocus placeholder="Password" name="password">
+            <div class="form__input-error-message"></div>
+        </div>
+        <button class="form__button" type="submit">Apply</button>
+        <p class="form__text">
+            <a href="login" class="form__link">Already Have an Account?</a>
+        </p>
+        <p class="form__text">
+            <a href="#" class="form__link">Forgot your Password?</a>
+        </p>
+        <p class="form__text">
+            <a href="/" class="form__link">Go Home</a>
+        </p>
+    </form>
 
-            <div class="form__input-group">
-                <input type="password" class="form__input" autofocus placeholder="Password" name="password">
-                <!-- Changed name from 'Password' to 'password' -->
-                <div class="form__input-error-message"></div>
-            </div>
-            <button class="form__button" type="submit">Apply</button>
-            <p class="form__text">
-                <a href="login" class="form__link">Already Have an Account?</a>
-            </p>
-            <p class="form__text">
-                <a href="#" class="form__link">Forgot your Password?</a>
-            </p>
-            <p class="form__text">
-                <a href="/" class="form__link">Go Home</a>
-            </p>
-        </form>
-    </div>
 
 </body>
 </body>
