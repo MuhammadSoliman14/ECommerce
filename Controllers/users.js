@@ -1,56 +1,50 @@
+const User = require('../models/User');
 
-const User = require('../models/User')
-const updateUser = async (req , res , next) =>{
-
+const updateUser = async (req, res, next) => {
     try {
         const updatedUser = await User.findOneAndUpdate(
-            {_id:req.params.id},
-            {
-                $set:req.body,
-            },
-            {new:true} // 3l4an yreturn updateduser
-        ) 
-        const {password , ...others} = updatedUser._doc;
-        res.status(200).json({...others })
-        
+            { _id: req.params.id },
+            { $set: req.body },
+            { new: true } // Return updated user
+        );
+        const { password, ...others } = updatedUser._doc;
+        res.status(200).json({ ...others });
     } catch (error) {
-        res.status(500).json('8alat')
+        res.status(500).json({ msg: error.message });
     }
-}
-const deleteUser = async( req ,res) =>{
+};
+
+const deleteUser = async (req, res) => {
     try {
-        await User.findByIdAndDelete(req.params.id)
-        res.status(200).json('user has been deleted')
-        
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json('User has been deleted');
     } catch (error) {
-        res.status(500).json(error)
-        
+        res.status(500).json({ msg: error.message });
     }
-}
-const getUser = async(req ,res)=>{
-    
+};
+
+const getUser = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id)
-        const {password,...others} = user._doc
+        const user = await User.findById(req.params.id);
+        const { password, ...others } = user._doc;
         res.status(200).json(others);
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({ msg: error.message });
     }
-}
-const getAllUsers = async(req,res)=>{
-    try {
-        const users = await User.find()
-        res.status(200).json(users)
-    } catch (error) {
-        res.status(500).json({msg:error});
-    }
-}
+};
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
 
 module.exports = {
     updateUser,
     deleteUser,
     getUser,
     getAllUsers,
-
-}
+};

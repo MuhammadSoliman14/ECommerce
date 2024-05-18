@@ -1,14 +1,16 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const routesRegister = require('./routes/auth.js')
-const routesUser = require('./routes/users.js')
-const routesProduct = require('./routes/product.js')
-const routesCart = require('./routes/cart.js')
-const routesOrder = require('./routes/order.js')
-const port = 3040;
-const connectDB = require('./database/database.js')
-const cors = require('cors')
+const express = require('express');
+const app = express();
+const routesRegister = require('./routes/auth.js');
+const routesUser = require('./routes/users.js');
+const routesProduct = require('./routes/product.js');
+const routesCart = require('./routes/cart.js');
+const routesOrder = require('./routes/order.js');
+const port = process.env.PORT || 3040; // Added fallback to port 3040 if PORT is not defined in .env
+
+const connectDB = require('./database/database.js');
+const cors = require('cors');
+
+app.use(cors()); // Using the cors middleware for handling CORS headers
 
 app.use(express.json());
 app.use(function(req, res, next) {
@@ -18,19 +20,21 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/auth',routesRegister);
-app.use('/user',routesUser);
-app.use('/product',routesProduct)
-app.use('/cart',routesCart)
-app.use('/order',routesOrder)
+app.use('/auth', routesRegister);
+app.use('/user', routesUser);
+app.use('/product', routesProduct);
+app.use('/cart', routesCart);
+app.use('/order', routesOrder);
 
-const start = async() => {
+const start = async () => {
     try {
-        await connectDB()
-        app.listen(port , console.log('server is connceted'))
+        await connectDB();
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
     } catch (error) {
-        console.log('server is not connected')
+        console.error('Failed to start server:', error);
     }
-}
+};
 
-start()
+start();
