@@ -7,7 +7,7 @@
     {
       id: 2,
       img: "https://images.pexels.com/photos/9293916/pexels-photo-9293916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "LOUNGEWEAR LOVE",
+      title: "Relax & Unwind",
     },
     {
       id: 3,
